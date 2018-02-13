@@ -167,22 +167,148 @@ docker exec -i books_db mysql -uroot -p123 bookshop < setup.sql
 
 #### 获取图书列表
 
+<table style="border-collapse: collapse;"><tr><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #e0f0ff">GET</td><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #ffd">/api/getBooks.service.php?action=getBookList</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">API Description</td><td style="padding: 10px 10px;border: 1px solid #ddd">获取图书列表</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Request URL</td><td style="padding: 10px 10px;border: 1px solid #ddd">http://localhost:8080/api/getBooks.service.php?action=getBookList</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Response Body</td><td style="padding: 10px 10px;border: 1px solid #ddd"><pre style="border: 1px solid #b7b7b7; border-radius: 5px; padding: 10px 20px;"><code>
+        [
+            {
+                bookId: "1",
+                bookImg: "https://img1.doubanio.com/mpic/s29105337.jpg",
+                bookTitle: "React Native 入门实践",
+                bookIsbn: "9787115411914",
+                bookPrice: "79",
+                // 借阅状态
+                bookState: "0",
+                bookSummary: "本书共4部分，首先简要介绍了React Native的开发基础知识..",
+                borrowTimes: "0",
+                createTime: "2017-03-08",
+                // 归还时间
+                returnTime: null,
+            }
+        ]
+    </code></pre></td></tr></table>
+
 ```javascript
 {
     GET: '/api/getBooks.service.php?action=getBookList',
-    'API description': '获取图书列表',
+    'API Description': '获取图书列表',
     'Request Parameter': [
-        ['Parameter', 'Data Type', 'Required', 'Description'],
-        ['action', 'string', true, 'index | getBookList | searchByIsbn | searchByName | searchById | return | delete | updateState '],
-        ['query', 'string', false, 'Description'],
-        ['operation', 'string', false, 'Description'],
-        ['inservice', 'boolean', true, 'Description'],
-        ['page', 'int', true, 'Description'],
-        ['size', 'int', true, 'Description'],
     ],
     'Request URL': 'http://localhost:8080/api/getBooks.service.php?action=getBookList',
+    'Response Body': `
+        [
+            {
+                bookId: "1",
+                bookImg: "https://img1.doubanio.com/mpic/s29105337.jpg",
+                bookTitle: "React Native 入门实践",
+                bookIsbn: "9787115411914",
+                bookPrice: "79",
+                // 借阅状态
+                bookState: "0",
+                bookSummary: "本书共4部分，首先简要介绍了React Native的开发基础知识..",
+                borrowTimes: "0",
+                createTime: "2017-03-08",
+                // 归还时间
+                returnTime: null,
+            }
+        ]
+    `
 }
 ```
+
+#### 搜索图书
+
+```javascript
+{
+    GET: '/api/getBooks.service.php',
+    'API Description': '搜索读者',
+    'Path Parameter': [
+        ['searchByIsbn', 'long', true, '按学号搜索，&bookIsbn=1218040201'],
+        ['searchByName', 'long', true, '按书名搜索，&bookName=ltaoo']
+    ],
+    'Request URL': 'http://localhost:8080/api/getBooks.service.php?action=searchByIsbn&bookIsbn=react',
+    'Response Body': `
+        {
+            data: [{
+                // 同图书详情
+            }],
+            // ???
+            state: 200
+        }
+    `,
+}
+```
+
+#### 增加图书
+
+<table style="border-collapse: collapse;"><tr><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #e0f0ff">POST</td><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #ffd">/api/addBook.service.php</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">API Description</td><td style="padding: 10px 10px;border: 1px solid #ddd">增加图书</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Request URL</td><td style="padding: 10px 10px;border: 1px solid #ddd">http://localhost:8080/api/addBook.service.php</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Body Parameter</td><td style="padding: 10px 10px;border: 1px solid #ddd"><table style="border-collapse: collapse;"><tr><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #e0f0ff">Content-Type</td><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #ffd">multipart/form-data</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Body</td><td style="padding: 10px 10px;border: 1px solid #ddd"><pre style="border: 1px solid #b7b7b7; border-radius: 5px; padding: 10px 20px;"><code>
+            ------WebKitFormBoundaryNkhY9LevoTlBsDsD
+Content-Disposition: form-data; name="title"
+
+React
+------WebKitFormBoundaryNkhY9LevoTlBsDsD
+Content-Disposition: form-data; name="price"
+
+65
+------WebKitFormBoundaryNkhY9LevoTlBsDsD
+Content-Disposition: form-data; name="isbn13"
+
+9787121259364
+------WebKitFormBoundaryNkhY9LevoTlBsDsD
+Content-Disposition: form-data; name="summary"
+
+2014 年横空出世的由Facebook 推出的开源框架React.js，基于Virtual DOM 重新定义了用户界面的开发方式，彻底革新了大家对前端框架的认识，将PHP 风格的开发方式迁移到客户端应用开发。其优势在于可以与各种类库、框架搭配使用。《React：引领未来的用户界面开发框架》是这一领域的首作，由多位一线专家精心撰写，采用一个全程实例全面介绍和剖析了ReactReact.js 的方方面面，适合广大前端开发者、设计人员，及所有对未来技术趋势感兴趣者阅读。
+------WebKitFormBoundaryNkhY9LevoTlBsDsD
+Content-Disposition: form-data; name="image"
+
+https://img1.doubanio.com/mpic/s28061237.jpg
+------WebKitFormBoundaryNkhY9LevoTlBsDsD--
+        </code></pre></td></tr></table></td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Response Body</td><td style="padding: 10px 10px;border: 1px solid #ddd"><pre style="border: 1px solid #b7b7b7; border-radius: 5px; padding: 10px 20px;"><code>
+        {
+            bookId: 2,
+        }
+    </code></pre></td></tr></table>
+
+```javascript
+{
+    POST: '/api/addBook.service.php',
+    'API Description': '增加图书',
+    'Request URL': 'http://localhost:8080/api/addBook.service.php',
+    'Body Parameter': {
+        'Content-Type': 'multipart/form-data',
+        Body: `
+            ------WebKitFormBoundaryNkhY9LevoTlBsDsD
+Content-Disposition: form-data; name="title"
+
+React
+------WebKitFormBoundaryNkhY9LevoTlBsDsD
+Content-Disposition: form-data; name="price"
+
+65
+------WebKitFormBoundaryNkhY9LevoTlBsDsD
+Content-Disposition: form-data; name="isbn13"
+
+9787121259364
+------WebKitFormBoundaryNkhY9LevoTlBsDsD
+Content-Disposition: form-data; name="summary"
+
+2014 年横空出世的由Facebook 推出的开源框架React.js，基于Virtual DOM 重新定义了用户界面的开发方式，彻底革新了大家对前端框架的认识，将PHP 风格的开发方式迁移到客户端应用开发。其优势在于可以与各种类库、框架搭配使用。《React：引领未来的用户界面开发框架》是这一领域的首作，由多位一线专家精心撰写，采用一个全程实例全面介绍和剖析了ReactReact.js 的方方面面，适合广大前端开发者、设计人员，及所有对未来技术趋势感兴趣者阅读。
+------WebKitFormBoundaryNkhY9LevoTlBsDsD
+Content-Disposition: form-data; name="image"
+
+https://img1.doubanio.com/mpic/s28061237.jpg
+------WebKitFormBoundaryNkhY9LevoTlBsDsD--
+        `
+    },
+    'Response Body': `
+        {
+            bookId: 2,
+        }
+    `
+}
+```
+
+#### 删除图书
+
+未完成。
 
 ### 读者相关
 
@@ -243,7 +369,7 @@ docker exec -i books_db mysql -uroot -p123 bookshop < setup.sql
 }
 ```
 
-#### 根据 id 查询读者
+#### 根据 id 获取详情
 
 <table style="border-collapse: collapse;"><tr><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #e0f0ff">GET</td><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #ffd">/api/getMembers.service.php?action=searchById</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">API Description</td><td style="padding: 10px 10px;border: 1px solid #ddd">根据 id 搜索读者</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Path Parameter</td><td  style="padding: 10px 10px;border: 1px solid #ddd"><table style="border-collapse: collapse;">
                 <tr>
@@ -309,19 +435,38 @@ docker exec -i books_db mysql -uroot -p123 bookshop < setup.sql
 }
 ```
 
-#### 根据学号搜索读者
+#### 搜索
+
+<table style="border-collapse: collapse;"><tr><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #e0f0ff">GET</td><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #ffd">/api/getMembers.service.php</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">API Description</td><td style="padding: 10px 10px;border: 1px solid #ddd">搜索读者</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Path Parameter</td><td  style="padding: 10px 10px;border: 1px solid #ddd"><table style="border-collapse: collapse;">
+                <tr>
+                    <th style="padding: 10px 10px;border: 1px solid #ddd;background-color: #f0f0f0">Parameter</th>
+                    <th style="padding: 10px 10px;border: 1px solid #ddd;background-color: #f0f0f0">Data Type</th>
+                    <th style="padding: 10px 10px;border: 1px solid #ddd;background-color: #f0f0f0">Required</th>
+                    <th style="padding: 10px 10px;border: 1px solid #ddd;background-color: #f0f0f0">Description</th>
+                </tr>
+                <tr><td style="padding: 10px 10px;border: 1px solid #ddd">searchByNum</td><td style="padding: 10px 10px;border: 1px solid #ddd">long</td><td style="padding: 10px 10px;border: 1px solid #ddd">true</td><td style="padding: 10px 10px;border: 1px solid #ddd">按学号搜索，&memberNum=1218040201</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">searchByName</td><td style="padding: 10px 10px;border: 1px solid #ddd">long</td><td style="padding: 10px 10px;border: 1px solid #ddd">true</td><td style="padding: 10px 10px;border: 1px solid #ddd">按姓名搜索，&memberName=ltaoo</td></tr>
+            </table></td><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Request URL</td><td style="padding: 10px 10px;border: 1px solid #ddd">http://localhost:8080/api/getMembers.service.php?action=searchByNum&memberNum=1218040201</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Response Body</td><td style="padding: 10px 10px;border: 1px solid #ddd"><pre style="border: 1px solid #b7b7b7; border-radius: 5px; padding: 10px 20px;"><code>
+        {
+            data: [{
+                // 同读者详情
+            }],
+        }
+    </code></pre></td></tr></table>
 
 ```javascript
 {
-    GET: '/api/getMembers.service.php?action=searchByNum',
-    'API Description': '根据学号搜索读者',
+    GET: '/api/getMembers.service.php',
+    'API Description': '搜索读者',
     'Path Parameter': [
-        ['memberNum', 'long', true, '']
+        ['searchByNum', 'long', true, '按学号搜索，&memberNum=1218040201'],
+        ['searchByName', 'long', true, '按姓名搜索，&memberName=ltaoo']
     ],
     'Request URL': 'http://localhost:8080/api/getMembers.service.php?action=searchByNum&memberNum=1218040201',
     'Response Body': `
         {
-            data: [],
+            data: [{
+                // 同读者详情
+            }],
         }
     `,
 }
@@ -524,6 +669,120 @@ Content-Disposition: form-data; name="borrowTimes"
     'Response Body': `
         {
             state: 'success',
+        }
+    `
+}
+```
+
+### 借阅记录
+
+#### 借阅记录列表
+
+```javascript
+{
+    GET: 
+}
+```
+
+### 借阅相关
+
+#### 获取借阅记录列表
+
+<table style="border-collapse: collapse;"><tr><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #e0f0ff">GET</td><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #ffd">/api/getRecords.service.php?action=recordsList</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">API Description</td><td style="padding: 10px 10px;border: 1px solid #ddd">获取借阅记录列表</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Request URL</td><td style="padding: 10px 10px;border: 1px solid #ddd">http://localhost:8080/api/getRecords.service.php?action=recordsList</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Response Body</td><td style="padding: 10px 10px;border: 1px solid #ddd"><pre style="border: 1px solid #b7b7b7; border-radius: 5px; padding: 10px 20px;"><code>
+       {
+            "state": 200, 
+            "data": [
+                {
+                    "recordId": "1", 
+                    "memberId": "3", 
+                    "memberNum": "1218040201", 
+                    "memberName": "wuya", 
+                    "memberTel": "13822136046", 
+                    "memberAddress": "8", 
+                    "memberRank": "2", 
+                    "memberCreateTime": "2018-02-13", 
+                    "bookId": "2", 
+                    "bookIsbn": "9787121259364", 
+                    "bookTitle": "React", 
+                    "bookImg": "https://img1.doubanio.com/mpic/s28061237.jpg", 
+                    "borrowTime": "2018-02-13", 
+                    "returnTime": null
+                }
+            ]
+        }
+    </code></pre></td></tr></table>
+
+```javascript
+{
+    GET: '/api/getRecords.service.php?action=recordsList',
+    'API Description': '获取借阅记录列表',
+    'Request URL': 'http://localhost:8080/api/getRecords.service.php?action=recordsList',
+    'Response Body': `
+       {
+            "state": 200, 
+            "data": [
+                {
+                    "recordId": "1", 
+                    "memberId": "3", 
+                    "memberNum": "1218040201", 
+                    "memberName": "wuya", 
+                    "memberTel": "13822136046", 
+                    "memberAddress": "8", 
+                    "memberRank": "2", 
+                    "memberCreateTime": "2018-02-13", 
+                    "bookId": "2", 
+                    "bookIsbn": "9787121259364", 
+                    "bookTitle": "React", 
+                    "bookImg": "https://img1.doubanio.com/mpic/s28061237.jpg", 
+                    "borrowTime": "2018-02-13", 
+                    "returnTime": null
+                }
+            ]
+        }
+    `
+}
+```
+
+#### 提交借阅记录
+
+<table style="border-collapse: collapse;"><tr><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #e0f0ff">POST</td><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #ffd">/api/addRecords.service.php</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">API Description</td><td style="padding: 10px 10px;border: 1px solid #ddd">增加借阅记录</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Request URL</td><td style="padding: 10px 10px;border: 1px solid #ddd">http://localhost:8080/api/addRecords.service.php</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Body Parameter</td><td style="padding: 10px 10px;border: 1px solid #ddd"><table style="border-collapse: collapse;"><tr><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #e0f0ff">Content-Type</td><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #ffd">multipart/form-data</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Body</td><td style="padding: 10px 10px;border: 1px solid #ddd"><pre style="border: 1px solid #b7b7b7; border-radius: 5px; padding: 10px 20px;"><code>
+            ------WebKitFormBoundaryWBUe8snfejNj5gbu
+Content-Disposition: form-data; name="memberId"
+
+3
+------WebKitFormBoundaryWBUe8snfejNj5gbu
+Content-Disposition: form-data; name="bookId"
+
+2
+------WebKitFormBoundaryWBUe8snfejNj5gbu--
+        </code></pre></td></tr></table></td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Response Body</td><td style="padding: 10px 10px;border: 1px solid #ddd"><pre style="border: 1px solid #b7b7b7; border-radius: 5px; padding: 10px 20px;"><code>
+        {
+            recordId: 1
+        }
+    </code></pre></td></tr></table>
+
+```javascript
+{
+    POST: '/api/addRecords.service.php',
+    'API Description': '增加借阅记录',
+    'Request URL': 'http://localhost:8080/api/addRecords.service.php',
+    'Body Parameter': {
+        'Content-Type': 'multipart/form-data',
+        Body: `
+            ------WebKitFormBoundaryWBUe8snfejNj5gbu
+Content-Disposition: form-data; name="memberId"
+
+3
+------WebKitFormBoundaryWBUe8snfejNj5gbu
+Content-Disposition: form-data; name="bookId"
+
+2
+------WebKitFormBoundaryWBUe8snfejNj5gbu--
+        `
+    },
+    'Response Body': `
+        {
+            recordId: 1
         }
     `
 }
