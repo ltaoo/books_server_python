@@ -24,150 +24,22 @@ docker exec -i books_db mysql -uroot -p123 bookshop < setup.sql
 
 #### 用户登录
 
-<table>
-    <tr>
-        <td>POST</td>
-        <td>/api/user/login</td>
-    </tr>
-    <tr>
-        <td>Body Parameter</td>
-        <td>
-            <table>
-                <tr>
-                    <td>Content-Type</td>
-                    <td>application/json</td>
-                </tr>
-                <tr>
-                    <td>Body</body>
-                    <td><pre><code>
-{
-    "username": "ltaoo",
-    "password": "hello520"
-}
-                    </code></pre></td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-    <tr>
-        <td>Response Body</td>
-        <td><pre><code>
-{
-    "c" : 0,
-    "m" : "",
-    "d" : null
-}
-        </code></pre></td>
-    </tr>
-</table>
-
-#### 用户注册
-
-```javascript
-{
-    POST: '/api/user/create',
-    'Body Parameter': {
-        'Content-Type': 'application/json',
-        Body: `{
-            "username": "ltaoo",
-            "password": "hello520"
-        }`,
-    },
-    'Response Body': `{
-        "c" : 0,
-        "m" : "",
-        "d" : null
-    }`
-}
-```
-
-#### 搜索用户
+#### 编辑用户
 
 #### 删除用户
 
-<table style="border-collapse: collapse;"><tr><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #e0f0ff">DELETE</td><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #ffd">/api/user/:id</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Body Parameter</td><td style="padding: 10px 10px;border: 1px solid #ddd"><table style="border-collapse: collapse;"><tr><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #e0f0ff">Content-Type</td><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #ffd">application/json</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Body</td><td style="padding: 10px 10px;border: 1px solid #ddd"><pre style="border: 1px solid #b7b7b7; border-radius: 5px; padding: 10px 20px;"><code>{
-"username": "ltaoo",
-"password": "hello520"
-}</code></pre></td></tr></table></td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Response Body</td><td style="padding: 10px 10px;border: 1px solid #ddd"><pre style="border: 1px solid #b7b7b7; border-radius: 5px; padding: 10px 20px;"><code>{
-"c" : 0,
-"m" : "",
-"d" : null
-}</code></pre></td></tr></table>
-```javascript
-{
-    DELETE: '/api/user/:id',
-    'Body Parameter': {
-        'Content-Type': 'application/json',
-        Body: `{
-            "username": "ltaoo",
-            "password": "hello520"
-        }`,
-    },
-    'Response Body': `{
-        "c" : 0,
-        "m" : "",
-        "d" : null
-    }`
-}
-```
+<div style="display: none;">
 
-#### 编辑用户
+</div>
+
 
 #### 管理员登录
-
-<table style="border-collapse: collapse;"><tr><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #e0f0ff">POST</td><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #ffd">/api/login.php</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">API Description</td><td style="padding: 10px 10px;border: 1px solid #ddd">管理员登录接口</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Body Parameter</td><td style="padding: 10px 10px;border: 1px solid #ddd"><table style="border-collapse: collapse;"><tr><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #e0f0ff">Content-Type</td><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #ffd">form-data</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Body</td><td style="padding: 10px 10px;border: 1px solid #ddd"><pre style="border: 1px solid #b7b7b7; border-radius: 5px; padding: 10px 20px;"><code>------WebKitFormBoundaryNn4581wdKEoIBHqJ
-        Content-Disposition: form-data; name="username"
-
-        admin
-        ------WebKitFormBoundaryNn4581wdKEoIBHqJ
-        Content-Disposition: form-data; name="password"
-
-        123456
-        ------WebKitFormBoundaryNn4581wdKEoIBHqJ--</code></pre></td></tr></table></td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Response Body</td><td style="padding: 10px 10px;border: 1px solid #ddd"><pre style="border: 1px solid #b7b7b7; border-radius: 5px; padding: 10px 20px;"><code>
-        {
-            data: ["1", "admin", "123456", "0"],
-            state: "success"
-        }
-    </code></pre></td></tr></table>
-
-```javascript
-{
-    POST: '/api/login.php',
-    'API Description': '管理员登录接口',
-    'Body Parameter': {
-        'Content-Type': 'form-data',
-        'Body': `------WebKitFormBoundaryNn4581wdKEoIBHqJ
-        Content-Disposition: form-data; name="username"
-
-        admin
-        ------WebKitFormBoundaryNn4581wdKEoIBHqJ
-        Content-Disposition: form-data; name="password"
-
-        123456
-        ------WebKitFormBoundaryNn4581wdKEoIBHqJ--`,
-    },
-    'Response Body': `
-        {
-            data: ["1", "admin", "123456", "0"],
-            state: "success"
-        }
-    `,
-}
-```
-
-#### 添加管理员
-
-#### 编辑管理员
-
-#### 删除管理员
-
-#### 搜索管理员
 
 ### 图书相关
 
 #### 获取图书列表
 
-<table style="border-collapse: collapse;"><tr><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #e0f0ff">GET</td><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #ffd">/api/getBooks.service.php?action=getBookList</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">API Description</td><td style="padding: 10px 10px;border: 1px solid #ddd">获取图书列表</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Request URL</td><td style="padding: 10px 10px;border: 1px solid #ddd">http://localhost:8080/api/getBooks.service.php?action=getBookList</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Response Body</td><td style="padding: 10px 10px;border: 1px solid #ddd"><pre style="border: 1px solid #b7b7b7; border-radius: 5px; padding: 10px 20px;"><code>
+<table style="border-collapse: collapse;"><tr><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd;background-color: #e0f0ff">GET</td><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd;background-color: #ffd">/api/getBooks.service.php?action=getBookList</td></tr><tr><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">API Description</td><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">获取图书列表</td></tr><tr><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">Request URL</td><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">http://localhost:8080/api/getBooks.service.php?action=getBookList</td></tr><tr><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">Response Body</td><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd"><pre style="border: 1px solid #b7b7b7; border-radius: 5px; padding: 10px 20px;"><code>
         [
             {
                 bookId: "1",
@@ -186,7 +58,7 @@ docker exec -i books_db mysql -uroot -p123 bookshop < setup.sql
         ]
     </code></pre></td></tr></table>
 
-```javascript
+<div style="display: none;">
 {
     GET: '/api/getBooks.service.php?action=getBookList',
     'API Description': '获取图书列表',
@@ -212,16 +84,35 @@ docker exec -i books_db mysql -uroot -p123 bookshop < setup.sql
         ]
     `
 }
-```
+</div>
 
 #### 搜索图书
 
+<table style="border-collapse: collapse;"><tr><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd;background-color: #e0f0ff">GET</td><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd;background-color: #ffd">/api/getBooks.service.php</td></tr><tr><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">API Description</td><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">搜索图书</td></tr><tr><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">Path Parameter</td><td  style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd"><table style="border-collapse: collapse;">
+                <tr>
+                    <th style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd;background-color: #f0f0f0">Parameter</th>
+                    <th style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd;background-color: #f0f0f0">Data Type</th>
+                    <th style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd;background-color: #f0f0f0">Required</th>
+                    <th style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd;background-color: #f0f0f0">Description</th>
+                </tr>
+                <tr><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">searchByIsbn</td><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">long</td><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">true</td><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">按ISBN搜索，&bookIsbn=1218040201</td></tr><tr><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">searchByName</td><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">long</td><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">true</td><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">按书名搜索，&bookName=ltaoo</td></tr>
+            </table></td><tr><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">Request URL</td><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">http://localhost:8080/api/getBooks.service.php?action=searchByIsbn&bookIsbn=react</td></tr><tr><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">Response Body</td><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd"><pre style="border: 1px solid #b7b7b7; border-radius: 5px; padding: 10px 20px;"><code>
+        {
+            data: [{
+                // 同图书详情
+            }],
+            // ???
+            state: 200
+        }
+    </code></pre></td></tr></table>
+
+<div style="display: none;">
 ```javascript
 {
     GET: '/api/getBooks.service.php',
-    'API Description': '搜索读者',
+    'API Description': '搜索图书',
     'Path Parameter': [
-        ['searchByIsbn', 'long', true, '按学号搜索，&bookIsbn=1218040201'],
+        ['searchByIsbn', 'long', true, '按ISBN搜索，&bookIsbn=1218040201'],
         ['searchByName', 'long', true, '按书名搜索，&bookName=ltaoo']
     ],
     'Request URL': 'http://localhost:8080/api/getBooks.service.php?action=searchByIsbn&bookIsbn=react',
@@ -236,10 +127,11 @@ docker exec -i books_db mysql -uroot -p123 bookshop < setup.sql
     `,
 }
 ```
+</div>
 
 #### 增加图书
 
-<table style="border-collapse: collapse;"><tr><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #e0f0ff">POST</td><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #ffd">/api/addBook.service.php</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">API Description</td><td style="padding: 10px 10px;border: 1px solid #ddd">增加图书</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Request URL</td><td style="padding: 10px 10px;border: 1px solid #ddd">http://localhost:8080/api/addBook.service.php</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Body Parameter</td><td style="padding: 10px 10px;border: 1px solid #ddd"><table style="border-collapse: collapse;"><tr><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #e0f0ff">Content-Type</td><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #ffd">multipart/form-data</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Body</td><td style="padding: 10px 10px;border: 1px solid #ddd"><pre style="border: 1px solid #b7b7b7; border-radius: 5px; padding: 10px 20px;"><code>
+<table style="border-collapse: collapse;"><tr><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd;background-color: #e0f0ff">POST</td><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd;background-color: #ffd">/api/addBook.service.php</td></tr><tr><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">API Description</td><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">增加图书</td></tr><tr><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">Request URL</td><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">http://localhost:8080/api/addBook.service.php</td></tr><tr><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">Body Parameter</td><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd"><table style="border-collapse: collapse;"><tr><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd;background-color: #e0f0ff">Content-Type</td><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd;background-color: #ffd">multipart/form-data</td></tr><tr><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">Body</td><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd"><pre style="border: 1px solid #b7b7b7; border-radius: 5px; padding: 10px 20px;"><code>
             ------WebKitFormBoundaryNkhY9LevoTlBsDsD
 Content-Disposition: form-data; name="title"
 
@@ -255,19 +147,20 @@ Content-Disposition: form-data; name="isbn13"
 ------WebKitFormBoundaryNkhY9LevoTlBsDsD
 Content-Disposition: form-data; name="summary"
 
-2014 年横空出世的由Facebook 推出的开源框架React.js，基于Virtual DOM 重新定义了用户界面的开发方式，彻底革新了大家对前端框架的认识，将PHP 风格的开发方式迁移到客户端应用开发。其优势在于可以与各种类库、框架搭配使用。《React：引领未来的用户界面开发框架》是这一领域的首作，由多位一线专家精心撰写，采用一个全程实例全面介绍和剖析了ReactReact.js 的方方面面，适合广大前端开发者、设计人员，及所有对未来技术趋势感兴趣者阅读。
+2014 年横空出世的由Facebook 推出的开源框架....
 ------WebKitFormBoundaryNkhY9LevoTlBsDsD
 Content-Disposition: form-data; name="image"
 
 https://img1.doubanio.com/mpic/s28061237.jpg
 ------WebKitFormBoundaryNkhY9LevoTlBsDsD--
-        </code></pre></td></tr></table></td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Response Body</td><td style="padding: 10px 10px;border: 1px solid #ddd"><pre style="border: 1px solid #b7b7b7; border-radius: 5px; padding: 10px 20px;"><code>
+        </code></pre></td></tr></table></td></tr><tr><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">Response Body</td><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd"><pre style="border: 1px solid #b7b7b7; border-radius: 5px; padding: 10px 20px;"><code>
         {
             bookId: 2,
         }
     </code></pre></td></tr></table>
 
-```javascript
+
+<div style="display: none;">
 {
     POST: '/api/addBook.service.php',
     'API Description': '增加图书',
@@ -290,7 +183,7 @@ Content-Disposition: form-data; name="isbn13"
 ------WebKitFormBoundaryNkhY9LevoTlBsDsD
 Content-Disposition: form-data; name="summary"
 
-2014 年横空出世的由Facebook 推出的开源框架React.js，基于Virtual DOM 重新定义了用户界面的开发方式，彻底革新了大家对前端框架的认识，将PHP 风格的开发方式迁移到客户端应用开发。其优势在于可以与各种类库、框架搭配使用。《React：引领未来的用户界面开发框架》是这一领域的首作，由多位一线专家精心撰写，采用一个全程实例全面介绍和剖析了ReactReact.js 的方方面面，适合广大前端开发者、设计人员，及所有对未来技术趋势感兴趣者阅读。
+2014 年横空出世的由Facebook 推出的开源框架...
 ------WebKitFormBoundaryNkhY9LevoTlBsDsD
 Content-Disposition: form-data; name="image"
 
@@ -304,7 +197,7 @@ https://img1.doubanio.com/mpic/s28061237.jpg
         }
     `
 }
-```
+</div>
 
 #### 删除图书
 
@@ -338,7 +231,7 @@ https://img1.doubanio.com/mpic/s28061237.jpg
         ]
     </code></pre></td></tr></table>
 
-```javascript
+<div style="display: none;">
 {
     GET: '/api/getMembers.service.php?action=getMemberList',
     'API Description': '获取全部的读者列表',
@@ -367,7 +260,7 @@ https://img1.doubanio.com/mpic/s28061237.jpg
         ]
     `
 }
-```
+</div>
 
 #### 根据 id 获取详情
 
@@ -402,7 +295,7 @@ https://img1.doubanio.com/mpic/s28061237.jpg
         }
     </code></pre></td></tr></table>
 
-````javascript
+<div style="display: none;">
 {
     GET: '/api/getMembers.service.php?action=searchById',
     'API Description': '根据 id 搜索读者',
@@ -433,19 +326,19 @@ https://img1.doubanio.com/mpic/s28061237.jpg
         }
     `,
 }
-```
+</div>
 
 #### 搜索
 
-<table style="border-collapse: collapse;"><tr><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #e0f0ff">GET</td><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #ffd">/api/getMembers.service.php</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">API Description</td><td style="padding: 10px 10px;border: 1px solid #ddd">搜索读者</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Path Parameter</td><td  style="padding: 10px 10px;border: 1px solid #ddd"><table style="border-collapse: collapse;">
+<table style="border-collapse: collapse;"><tr><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd;background-color: #e0f0ff">GET</td><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd;background-color: #ffd">/api/getMembers.service.php</td></tr><tr><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">API Description</td><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">搜索读者</td></tr><tr><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">Path Parameter</td><td  style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd"><table style="border-collapse: collapse;">
                 <tr>
-                    <th style="padding: 10px 10px;border: 1px solid #ddd;background-color: #f0f0f0">Parameter</th>
-                    <th style="padding: 10px 10px;border: 1px solid #ddd;background-color: #f0f0f0">Data Type</th>
-                    <th style="padding: 10px 10px;border: 1px solid #ddd;background-color: #f0f0f0">Required</th>
-                    <th style="padding: 10px 10px;border: 1px solid #ddd;background-color: #f0f0f0">Description</th>
+                    <th style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd;background-color: #f0f0f0">Parameter</th>
+                    <th style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd;background-color: #f0f0f0">Data Type</th>
+                    <th style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd;background-color: #f0f0f0">Required</th>
+                    <th style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd;background-color: #f0f0f0">Description</th>
                 </tr>
-                <tr><td style="padding: 10px 10px;border: 1px solid #ddd">searchByNum</td><td style="padding: 10px 10px;border: 1px solid #ddd">long</td><td style="padding: 10px 10px;border: 1px solid #ddd">true</td><td style="padding: 10px 10px;border: 1px solid #ddd">按学号搜索，&memberNum=1218040201</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">searchByName</td><td style="padding: 10px 10px;border: 1px solid #ddd">long</td><td style="padding: 10px 10px;border: 1px solid #ddd">true</td><td style="padding: 10px 10px;border: 1px solid #ddd">按姓名搜索，&memberName=ltaoo</td></tr>
-            </table></td><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Request URL</td><td style="padding: 10px 10px;border: 1px solid #ddd">http://localhost:8080/api/getMembers.service.php?action=searchByNum&memberNum=1218040201</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Response Body</td><td style="padding: 10px 10px;border: 1px solid #ddd"><pre style="border: 1px solid #b7b7b7; border-radius: 5px; padding: 10px 20px;"><code>
+                <tr><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">searchByNum</td><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">long</td><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">true</td><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">按学号搜索，&memberNum=1218040201</td></tr><tr><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">searchByName</td><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">long</td><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">true</td><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">按姓名搜索，&memberName=ltaoo</td></tr>
+            </table></td><tr><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">Request URL</td><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">http://localhost:8080/api/getMembers.service.php?action=searchByNum&memberNum=1218040201</td></tr><tr><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd">Response Body</td><td style="padding: 10px 10px; min-width: 150px;border: 1px solid #ddd"><pre style="border: 1px solid #b7b7b7; border-radius: 5px; padding: 10px 20px;"><code>
         {
             data: [{
                 // 同读者详情
@@ -453,6 +346,7 @@ https://img1.doubanio.com/mpic/s28061237.jpg
         }
     </code></pre></td></tr></table>
 
+<div style="display: none;">
 ```javascript
 {
     GET: '/api/getMembers.service.php',
@@ -471,6 +365,7 @@ https://img1.doubanio.com/mpic/s28061237.jpg
     `,
 }
 ```
+</div>
 
 #### 新增读者
 
@@ -502,7 +397,8 @@ Content-Disposition: form-data; name="memberRank"
         }
     </code></pre></td></tr></table>
 
-```javascript
+
+<div style="display: none;">
 {
     POST: '/api/addMember.service.php',
     'API Description': '新增读者',
@@ -539,7 +435,7 @@ Content-Disposition: form-data; name="memberRank"
         }
     `,
 }
-```
+</div>
 
 #### 更新读者信息
 
@@ -587,7 +483,8 @@ Content-Disposition: form-data; name="borrowTimes"
         }
     </code></pre></td></tr></table>
 
-```javascript
+
+<div style="display: none;">
 {
     POST: '/api/getMembers.service.php?action=update',
     'API Description': '更新指定读者信息',
@@ -640,7 +537,7 @@ Content-Disposition: form-data; name="borrowTimes"
         }
     `
 }
-```
+</div>
 
 #### 删除读者
 
@@ -658,7 +555,8 @@ Content-Disposition: form-data; name="borrowTimes"
         }
     </code></pre></td></tr></table>
 
-```javascript
+
+<div style="display: none;">
 {
     GET: '/api/getMembers.service.php?action=delete',
     'API Description': '根据 id 从数据库物理删除读者',
@@ -672,17 +570,11 @@ Content-Disposition: form-data; name="borrowTimes"
         }
     `
 }
-```
+</div>
 
 ### 借阅记录
 
 #### 借阅记录列表
-
-```javascript
-{
-    GET: 
-}
-```
 
 ### 借阅相关
 
@@ -712,7 +604,8 @@ Content-Disposition: form-data; name="borrowTimes"
         }
     </code></pre></td></tr></table>
 
-```javascript
+
+<div style="display: none;">
 {
     GET: '/api/getRecords.service.php?action=recordsList',
     'API Description': '获取借阅记录列表',
@@ -741,7 +634,7 @@ Content-Disposition: form-data; name="borrowTimes"
         }
     `
 }
-```
+</div>
 
 #### 提交借阅记录
 
@@ -761,7 +654,8 @@ Content-Disposition: form-data; name="bookId"
         }
     </code></pre></td></tr></table>
 
-```javascript
+
+<div style="display: none;">
 {
     POST: '/api/addRecords.service.php',
     'API Description': '增加借阅记录',
@@ -786,7 +680,7 @@ Content-Disposition: form-data; name="bookId"
         }
     `
 }
-```
+</div>
 
 ## 数据库表
 
