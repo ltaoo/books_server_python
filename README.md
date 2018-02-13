@@ -18,6 +18,517 @@ docker build -t bookshop .
 docker exec -i books_db mysql -uroot -p123 bookshop < setup.sql
 ```
 
+## Api
+
+### 用户相关
+
+#### 用户登录
+
+<table>
+    <tr>
+        <td>POST</td>
+        <td>/api/user/login</td>
+    </tr>
+    <tr>
+        <td>Body Parameter</td>
+        <td>
+            <table>
+                <tr>
+                    <td>Content-Type</td>
+                    <td>application/json</td>
+                </tr>
+                <tr>
+                    <td>Body</body>
+                    <td><pre><code>
+{
+    "username": "ltaoo",
+    "password": "hello520"
+}
+                    </code></pre></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>Response Body</td>
+        <td><pre><code>
+{
+    "c" : 0,
+    "m" : "",
+    "d" : null
+}
+        </code></pre></td>
+    </tr>
+</table>
+
+#### 用户注册
+
+```javascript
+{
+    POST: '/api/user/create',
+    'Body Parameter': {
+        'Content-Type': 'application/json',
+        Body: `{
+            "username": "ltaoo",
+            "password": "hello520"
+        }`,
+    },
+    'Response Body': `{
+        "c" : 0,
+        "m" : "",
+        "d" : null
+    }`
+}
+```
+
+#### 搜索用户
+
+#### 删除用户
+
+<table style="border-collapse: collapse;"><tr><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #e0f0ff">DELETE</td><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #ffd">/api/user/:id</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Body Parameter</td><td style="padding: 10px 10px;border: 1px solid #ddd"><table style="border-collapse: collapse;"><tr><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #e0f0ff">Content-Type</td><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #ffd">application/json</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Body</td><td style="padding: 10px 10px;border: 1px solid #ddd"><pre style="border: 1px solid #b7b7b7; border-radius: 5px; padding: 10px 20px;"><code>{
+"username": "ltaoo",
+"password": "hello520"
+}</code></pre></td></tr></table></td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Response Body</td><td style="padding: 10px 10px;border: 1px solid #ddd"><pre style="border: 1px solid #b7b7b7; border-radius: 5px; padding: 10px 20px;"><code>{
+"c" : 0,
+"m" : "",
+"d" : null
+}</code></pre></td></tr></table>
+```javascript
+{
+    DELETE: '/api/user/:id',
+    'Body Parameter': {
+        'Content-Type': 'application/json',
+        Body: `{
+            "username": "ltaoo",
+            "password": "hello520"
+        }`,
+    },
+    'Response Body': `{
+        "c" : 0,
+        "m" : "",
+        "d" : null
+    }`
+}
+```
+
+#### 编辑用户
+
+#### 管理员登录
+
+<table style="border-collapse: collapse;"><tr><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #e0f0ff">POST</td><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #ffd">/api/login.php</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">API Description</td><td style="padding: 10px 10px;border: 1px solid #ddd">管理员登录接口</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Body Parameter</td><td style="padding: 10px 10px;border: 1px solid #ddd"><table style="border-collapse: collapse;"><tr><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #e0f0ff">Content-Type</td><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #ffd">form-data</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Body</td><td style="padding: 10px 10px;border: 1px solid #ddd"><pre style="border: 1px solid #b7b7b7; border-radius: 5px; padding: 10px 20px;"><code>------WebKitFormBoundaryNn4581wdKEoIBHqJ
+        Content-Disposition: form-data; name="username"
+
+        admin
+        ------WebKitFormBoundaryNn4581wdKEoIBHqJ
+        Content-Disposition: form-data; name="password"
+
+        123456
+        ------WebKitFormBoundaryNn4581wdKEoIBHqJ--</code></pre></td></tr></table></td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Response Body</td><td style="padding: 10px 10px;border: 1px solid #ddd"><pre style="border: 1px solid #b7b7b7; border-radius: 5px; padding: 10px 20px;"><code>
+        {
+            data: ["1", "admin", "123456", "0"],
+            state: "success"
+        }
+    </code></pre></td></tr></table>
+
+```javascript
+{
+    POST: '/api/login.php',
+    'API Description': '管理员登录接口',
+    'Body Parameter': {
+        'Content-Type': 'form-data',
+        'Body': `------WebKitFormBoundaryNn4581wdKEoIBHqJ
+        Content-Disposition: form-data; name="username"
+
+        admin
+        ------WebKitFormBoundaryNn4581wdKEoIBHqJ
+        Content-Disposition: form-data; name="password"
+
+        123456
+        ------WebKitFormBoundaryNn4581wdKEoIBHqJ--`,
+    },
+    'Response Body': `
+        {
+            data: ["1", "admin", "123456", "0"],
+            state: "success"
+        }
+    `,
+}
+```
+
+#### 添加管理员
+
+#### 编辑管理员
+
+#### 删除管理员
+
+#### 搜索管理员
+
+### 图书相关
+
+#### 获取图书列表
+
+```javascript
+{
+    GET: '/api/getBooks.service.php?action=getBookList',
+    'API description': '获取图书列表',
+    'Request Parameter': [
+        ['Parameter', 'Data Type', 'Required', 'Description'],
+        ['action', 'string', true, 'index | getBookList | searchByIsbn | searchByName | searchById | return | delete | updateState '],
+        ['query', 'string', false, 'Description'],
+        ['operation', 'string', false, 'Description'],
+        ['inservice', 'boolean', true, 'Description'],
+        ['page', 'int', true, 'Description'],
+        ['size', 'int', true, 'Description'],
+    ],
+    'Request URL': 'http://localhost:8080/api/getBooks.service.php?action=getBookList',
+}
+```
+
+### 读者相关
+
+#### 获取读者列表
+
+<table style="border-collapse: collapse;"><tr><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #e0f0ff">GET</td><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #ffd">/api/getMembers.service.php?action=getMemberList</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">API Description</td><td style="padding: 10px 10px;border: 1px solid #ddd">获取全部的读者列表</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Request URL</td><td style="padding: 10px 10px;border: 1px solid #ddd">http://localhost:8080/api/getMembers.service.php?action=getMemberList</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Response Body</td><td style="padding: 10px 10px;border: 1px solid #ddd"><pre style="border: 1px solid #b7b7b7; border-radius: 5px; padding: 10px 20px;"><code>
+        [
+            {
+                memberId: "1",
+                memberName: "ltaoo",
+                // 学号
+                memberNum: "123456",
+                // 电话
+                memberTel: "123456",
+                // 等级
+                memberRank: "1",
+                // 地址
+                memberAddress: "8-8-218",
+                // 创建时间
+                memberCreateTime: "2015-10-20",
+                // 当前借书数
+                borrowNum: "0",
+                // 总借阅次数
+                borrowTimes: "0"
+            },
+            // ...
+        ]
+    </code></pre></td></tr></table>
+
+```javascript
+{
+    GET: '/api/getMembers.service.php?action=getMemberList',
+    'API Description': '获取全部的读者列表',
+    'Request URL': 'http://localhost:8080/api/getMembers.service.php?action=getMemberList',
+    'Response Body': `
+        [
+            {
+                memberId: "1",
+                memberName: "ltaoo",
+                // 学号
+                memberNum: "123456",
+                // 电话
+                memberTel: "123456",
+                // 等级
+                memberRank: "1",
+                // 地址
+                memberAddress: "8-8-218",
+                // 创建时间
+                memberCreateTime: "2015-10-20",
+                // 当前借书数
+                borrowNum: "0",
+                // 总借阅次数
+                borrowTimes: "0"
+            },
+            // ...
+        ]
+    `
+}
+```
+
+#### 根据 id 查询读者
+
+<table style="border-collapse: collapse;"><tr><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #e0f0ff">GET</td><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #ffd">/api/getMembers.service.php?action=searchById</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">API Description</td><td style="padding: 10px 10px;border: 1px solid #ddd">根据 id 搜索读者</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Path Parameter</td><td  style="padding: 10px 10px;border: 1px solid #ddd"><table style="border-collapse: collapse;">
+                <tr>
+                    <th style="padding: 10px 10px;border: 1px solid #ddd;background-color: #f0f0f0">Parameter</th>
+                    <th style="padding: 10px 10px;border: 1px solid #ddd;background-color: #f0f0f0">Data Type</th>
+                    <th style="padding: 10px 10px;border: 1px solid #ddd;background-color: #f0f0f0">Required</th>
+                    <th style="padding: 10px 10px;border: 1px solid #ddd;background-color: #f0f0f0">Description</th>
+                </tr>
+                <tr><td style="padding: 10px 10px;border: 1px solid #ddd">memberId</td><td style="padding: 10px 10px;border: 1px solid #ddd">int</td><td style="padding: 10px 10px;border: 1px solid #ddd">true</td><td style="padding: 10px 10px;border: 1px solid #ddd"></td></tr>
+            </table></td><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Request URL</td><td style="padding: 10px 10px;border: 1px solid #ddd">http://localhost:8080/api/getMembers.service.php?action=searchByNum&memberId=2</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Response Body</td><td style="padding: 10px 10px;border: 1px solid #ddd"><pre style="border: 1px solid #b7b7b7; border-radius: 5px; padding: 10px 20px;"><code>
+        {
+            data: {
+                memberId: "1",
+                memberName: "ltaoo",
+                // 学号
+                memberNum: "123456",
+                // 电话
+                memberTel: "123456",
+                // 等级
+                memberRank: "1",
+                // 地址
+                memberAddress: "8-8-218",
+                // 创建时间
+                memberCreateTime: "2015-10-20",
+                // 当前借书数
+                borrowNum: "0",
+                // 总借阅次数
+                borrowTimes: "0"
+            },
+        }
+    </code></pre></td></tr></table>
+
+````javascript
+{
+    GET: '/api/getMembers.service.php?action=searchById',
+    'API Description': '根据 id 搜索读者',
+    'Path Parameter': [
+        ['memberId', 'int', true, '']
+    ],
+    'Request URL': 'http://localhost:8080/api/getMembers.service.php?action=searchById&memberId=2',
+    'Response Body': `
+        {
+            data: {
+                memberId: "1",
+                memberName: "ltaoo",
+                // 学号
+                memberNum: "123456",
+                // 电话
+                memberTel: "123456",
+                // 等级
+                memberRank: "1",
+                // 地址
+                memberAddress: "8-8-218",
+                // 创建时间
+                memberCreateTime: "2015-10-20",
+                // 当前借书数
+                borrowNum: "0",
+                // 总借阅次数
+                borrowTimes: "0"
+            },
+        }
+    `,
+}
+```
+
+#### 根据学号搜索读者
+
+```javascript
+{
+    GET: '/api/getMembers.service.php?action=searchByNum',
+    'API Description': '根据学号搜索读者',
+    'Path Parameter': [
+        ['memberNum', 'long', true, '']
+    ],
+    'Request URL': 'http://localhost:8080/api/getMembers.service.php?action=searchByNum&memberNum=1218040201',
+    'Response Body': `
+        {
+            data: [],
+        }
+    `,
+}
+```
+
+#### 新增读者
+
+<table style="border-collapse: collapse;"><tr><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #e0f0ff">POST</td><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #ffd">/api/addMember.service.php</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">API Description</td><td style="padding: 10px 10px;border: 1px solid #ddd">新增读者</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Request URL</td><td style="padding: 10px 10px;border: 1px solid #ddd">http://localhost:8080/api/addMember.service.php</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Body Parameter</td><td style="padding: 10px 10px;border: 1px solid #ddd"><table style="border-collapse: collapse;"><tr><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #e0f0ff">Content-Type</td><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #ffd">multipart/form-data</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Body</td><td style="padding: 10px 10px;border: 1px solid #ddd"><pre style="border: 1px solid #b7b7b7; border-radius: 5px; padding: 10px 20px;"><code>
+        ------WebKitFormBoundary3w9mXc15I0ROC52A
+Content-Disposition: form-data; name="memberName"
+
+无涯
+------WebKitFormBoundary3w9mXc15I0ROC52A
+Content-Disposition: form-data; name="memberNum"
+
+1218040201
+------WebKitFormBoundary3w9mXc15I0ROC52A
+Content-Disposition: form-data; name="memberTel"
+
+13822136046
+------WebKitFormBoundary3w9mXc15I0ROC52A
+Content-Disposition: form-data; name="memberAddress"
+
+8
+------WebKitFormBoundary3w9mXc15I0ROC52A
+Content-Disposition: form-data; name="memberRank"
+
+1
+------WebKitFormBoundary3w9mXc15I0ROC52A--
+        </code></pre></td></tr></table></td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Response Body</td><td style="padding: 10px 10px;border: 1px solid #ddd"><pre style="border: 1px solid #b7b7b7; border-radius: 5px; padding: 10px 20px;"><code>
+        {
+            memberId: 2,
+        }
+    </code></pre></td></tr></table>
+
+```javascript
+{
+    POST: '/api/addMember.service.php',
+    'API Description': '新增读者',
+    'Request URL': 'http://localhost:8080/api/addMember.service.php',
+    'Body Parameter': {
+        'Content-Type': 'multipart/form-data',
+        Body: `
+        ------WebKitFormBoundary3w9mXc15I0ROC52A
+Content-Disposition: form-data; name="memberName"
+
+无涯
+------WebKitFormBoundary3w9mXc15I0ROC52A
+Content-Disposition: form-data; name="memberNum"
+
+1218040201
+------WebKitFormBoundary3w9mXc15I0ROC52A
+Content-Disposition: form-data; name="memberTel"
+
+13822136046
+------WebKitFormBoundary3w9mXc15I0ROC52A
+Content-Disposition: form-data; name="memberAddress"
+
+8
+------WebKitFormBoundary3w9mXc15I0ROC52A
+Content-Disposition: form-data; name="memberRank"
+
+1
+------WebKitFormBoundary3w9mXc15I0ROC52A--
+        `,
+    },
+    'Response Body': `
+        {
+            memberId: 2,
+        }
+    `,
+}
+```
+
+#### 更新读者信息
+
+<table style="border-collapse: collapse;"><tr><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #e0f0ff">POST</td><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #ffd">/api/getMembers.service.php?action=update</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Request URL</td><td style="padding: 10px 10px;border: 1px solid #ddd">http://localhost:8080/api/getMembers.service.php?action=update</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Body Parameter</td><td style="padding: 10px 10px;border: 1px solid #ddd"><table style="border-collapse: collapse;"><tr><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #e0f0ff">Content-Type</td><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #ffd">multipart/form-data</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Body</td><td style="padding: 10px 10px;border: 1px solid #ddd"><pre style="border: 1px solid #b7b7b7; border-radius: 5px; padding: 10px 20px;"><code>
+            ------WebKitFormBoundaryOsMk99NnUBtK76I6
+Content-Disposition: form-data; name="memberId"
+
+2
+------WebKitFormBoundaryOsMk99NnUBtK76I6
+Content-Disposition: form-data; name="memberName"
+
+无涯
+------WebKitFormBoundaryOsMk99NnUBtK76I6
+Content-Disposition: form-data; name="memberNum"
+
+1218040201
+------WebKitFormBoundaryOsMk99NnUBtK76I6
+Content-Disposition: form-data; name="memberTel"
+
+13822136046
+------WebKitFormBoundaryOsMk99NnUBtK76I6
+Content-Disposition: form-data; name="memberAddress"
+
+87234
+------WebKitFormBoundaryOsMk99NnUBtK76I6
+Content-Disposition: form-data; name="memberRank"
+
+0
+------WebKitFormBoundaryOsMk99NnUBtK76I6
+Content-Disposition: form-data; name="memberCreateTime"
+
+2018-02-13
+------WebKitFormBoundaryOsMk99NnUBtK76I6
+Content-Disposition: form-data; name="borrowNum"
+
+0
+------WebKitFormBoundaryOsMk99NnUBtK76I6
+Content-Disposition: form-data; name="borrowTimes"
+
+0
+------WebKitFormBoundaryOsMk99NnUBtK76I6--
+        </code></pre></td></tr></table></td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Response Body</td><td style="padding: 10px 10px;border: 1px solid #ddd"><pre style="border: 1px solid #b7b7b7; border-radius: 5px; padding: 10px 20px;"><code>
+        {
+            state: 'success'
+        }
+    </code></pre></td></tr></table>
+
+```javascript
+{
+    POST: '/api/getMembers.service.php?action=update',
+    'API Description': '更新指定读者信息',
+    'Request URL': 'http://localhost:8080/api/getMembers.service.php?action=update',
+    'Body Parameter': {
+        'Content-Type': 'multipart/form-data',
+        Body: `
+            ------WebKitFormBoundaryOsMk99NnUBtK76I6
+Content-Disposition: form-data; name="memberId"
+
+2
+------WebKitFormBoundaryOsMk99NnUBtK76I6
+Content-Disposition: form-data; name="memberName"
+
+无涯
+------WebKitFormBoundaryOsMk99NnUBtK76I6
+Content-Disposition: form-data; name="memberNum"
+
+1218040201
+------WebKitFormBoundaryOsMk99NnUBtK76I6
+Content-Disposition: form-data; name="memberTel"
+
+13822136046
+------WebKitFormBoundaryOsMk99NnUBtK76I6
+Content-Disposition: form-data; name="memberAddress"
+
+87234
+------WebKitFormBoundaryOsMk99NnUBtK76I6
+Content-Disposition: form-data; name="memberRank"
+
+0
+------WebKitFormBoundaryOsMk99NnUBtK76I6
+Content-Disposition: form-data; name="memberCreateTime"
+
+2018-02-13
+------WebKitFormBoundaryOsMk99NnUBtK76I6
+Content-Disposition: form-data; name="borrowNum"
+
+0
+------WebKitFormBoundaryOsMk99NnUBtK76I6
+Content-Disposition: form-data; name="borrowTimes"
+
+0
+------WebKitFormBoundaryOsMk99NnUBtK76I6--
+        `
+    },
+    'Response Body': `
+        {
+            state: 'success'
+        }
+    `
+}
+```
+
+#### 删除读者
+
+<table style="border-collapse: collapse;"><tr><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #e0f0ff">GET</td><td style="padding: 10px 10px;border: 1px solid #ddd;background-color: #ffd">/api/getMembers.service.php?action=delete</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">API Description</td><td style="padding: 10px 10px;border: 1px solid #ddd">根据 id 从数据库物理删除读者</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Request URL</td><td style="padding: 10px 10px;border: 1px solid #ddd">http://localhost:8080/api/getMembers.service.php?action=delete&memberId=2</td></tr><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Path Parameter</td><td  style="padding: 10px 10px;border: 1px solid #ddd"><table style="border-collapse: collapse;">
+                <tr>
+                    <th style="padding: 10px 10px;border: 1px solid #ddd;background-color: #f0f0f0">Parameter</th>
+                    <th style="padding: 10px 10px;border: 1px solid #ddd;background-color: #f0f0f0">Data Type</th>
+                    <th style="padding: 10px 10px;border: 1px solid #ddd;background-color: #f0f0f0">Required</th>
+                    <th style="padding: 10px 10px;border: 1px solid #ddd;background-color: #f0f0f0">Description</th>
+                </tr>
+                <tr><td style="padding: 10px 10px;border: 1px solid #ddd">memberId</td><td style="padding: 10px 10px;border: 1px solid #ddd">int</td><td style="padding: 10px 10px;border: 1px solid #ddd">true</td><td style="padding: 10px 10px;border: 1px solid #ddd"></td></tr>
+            </table></td><tr><td style="padding: 10px 10px;border: 1px solid #ddd">Response Body</td><td style="padding: 10px 10px;border: 1px solid #ddd"><pre style="border: 1px solid #b7b7b7; border-radius: 5px; padding: 10px 20px;"><code>
+        {
+            state: 'success',
+        }
+    </code></pre></td></tr></table>
+
+```javascript
+{
+    GET: '/api/getMembers.service.php?action=delete',
+    'API Description': '根据 id 从数据库物理删除读者',
+    'Request URL': 'http://localhost:8080/api/getMembers.service.php?action=delete&memberId=2',
+    'Path Parameter': [
+        ['memberId', 'int', true, '']
+    ],
+    'Response Body': `
+        {
+            state: 'success',
+        }
+    `
+}
+```
+
 ## 数据库表
 
 ### 读者信息表
