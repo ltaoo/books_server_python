@@ -1,11 +1,12 @@
 from flask import Flask
-from flask_script import Manager
+from flask_script import Manager, Shell
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 manager = Manager(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:yimi@172.17.0.3:3306/books'
 db = SQLAlchemy(app)
+
 
 # 角色
 class Role(db.Model):
@@ -79,6 +80,11 @@ class Order(db.Model):
 @app.route('/')
 def index():
     return '<h1>Hello Flask!</h1>'
+
+# 导出上下文便于使用
+def make_shell_context():
+    return dict(app=app, db=db, User=User, Role=Role)
+manager.add_command('shell', Shell(make_context=make_shell_context))
 
 if __name__ == '__main__':
     # app.run(host='0.0.0.0', debug=True)
