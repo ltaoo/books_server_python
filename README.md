@@ -49,6 +49,27 @@ db.session.commit()
 AttributeError: 'Role' object has no attribute 'translate'
 这里有一个一定要注意的点是，虽然在表中定义的是`role_id`字段，但是这里实际要传入的是`role`！！
 
+
+### 运行项目
+
+```bash
+python manage.py runserver --host 0.0.0.0
+```
+
+### 依赖管理
+
+生成依赖列表
+
+```bash
+pip freeze >requirements.txt
+```
+
+安装依赖
+
+```bash
+pip install -r requirements.txt
+```
+
 ## Api
 
 ### 用户相关
