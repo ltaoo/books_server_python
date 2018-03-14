@@ -1,12 +1,12 @@
 from flask import Flask
 from flask_script import Manager, Shell
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate, MigrateCommand
 
 app = Flask(__name__)
 manager = Manager(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:yimi@172.17.0.3:3306/books'
 db = SQLAlchemy(app)
-
 
 # 角色
 class Role(db.Model):
@@ -28,7 +28,7 @@ class User(db.Model):
     address = db.Column(db.String(120))
     rank = db.Column(db.Integer)
 
-    records = db.relationship('Record', backref='role')
+    records = db.relationship('Record', backref='user')
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
 
     def __repr__(self):
@@ -41,10 +41,11 @@ class Book(db.Model):
     title = db.Column(db.String(80))
     isbn = db.Column(db.String(120))
     price = db.Column(db.Float)
-    address = db.Column(db.String(120))
-    rank = db.Column(db.Integer)
+    summary = db.Column(db.String(120))
+    img = db.Column(db.String(120))
+    state = db.Column(db.Integer)
 
-    records = db.relationship('Record', backref='role')
+    records = db.relationship('Record', backref='book')
 
     def __repr__(self):
         return '<Book %r>' % self.title
@@ -86,6 +87,9 @@ def make_shell_context():
     return dict(app=app, db=db, User=User, Role=Role)
 manager.add_command('shell', Shell(make_context=make_shell_context))
 
+migrate = Migrate(app, db)
+manager.add_command('db', MigrateCommand)
+
+
 if __name__ == '__main__':
-    # app.run(host='0.0.0.0', debug=True)
     manager.run()

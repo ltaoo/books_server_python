@@ -37,6 +37,18 @@ cd /var/www/books-server
 pip install flask
 ```
 
+### 初始化数据
+
+```bash
+from index import db, Role, User
+admin_role = Role(name='Admin')
+admin = User(username='ltaoo', email='184009428@qq.com', tel='13822136046', role=admin_role, address='218', rank=1)
+db.session.add_all([admin_role, admin])
+db.session.commit()
+```
+AttributeError: 'Role' object has no attribute 'translate'
+这里有一个一定要注意的点是，虽然在表中定义的是`role_id`字段，但是这里实际要传入的是`role`！！
+
 ## Api
 
 ### 用户相关
