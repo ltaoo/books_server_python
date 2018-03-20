@@ -1,4 +1,8 @@
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
+
+from . import login_manager
+
 
 from . import db
 
@@ -13,11 +17,11 @@ class Role(db.Model):
         return '<Role %r>' % self.name
 
 # 用户表
-class User(db.Model):
+class User(UserMixin, db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True)
-    email = db.Column(db.String(120), unique=True)
+    email = db.Column(db.String(64), unique=True, index=True)
     tel = db.Column(db.String(120))
     address = db.Column(db.String(120))
     rank = db.Column(db.Integer)
@@ -35,6 +39,29 @@ class User(db.Model):
 
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
+    
+    # 用户令牌
+    def generate_auth_token(self, expiration):
+        s = Serializer(current_app.config['SECRET_KEY'], expires_in = expiration)
+        return s.dumps({
+            'id': self.id
+        })
+    @staticmethod
+    def verify_auth_token(token):
+        s = Serializer(current_app.config['SECRET_KEY'])
+        try:
+            data = s.loads(token)
+        except:
+            return None
+        return User.query.get(data['id'])
+    
+    # 将用户转换成 JSON
+    def to_json(self):
+        json_user = {
+            'url': url_for('api.get_user', id = self.id, _external = True),
+            'username': self.username
+        }
+        return json_user
 
     def __repr__(self):
         return '<User %r>' % self.username
@@ -82,3 +109,8 @@ class Order(db.Model):
 
     def __repr__(self):
         return '<Order %r>' % self.id
+
+# Flask-Login 要求实现的方法
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
