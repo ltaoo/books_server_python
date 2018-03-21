@@ -58,8 +58,9 @@ class User(UserMixin, db.Model):
     # 将用户转换成 JSON
     def to_json(self):
         json_user = {
-            'url': url_for('api.get_user', id = self.id, _external = True),
-            'username': self.username
+            # 'url': url_for('api.get_user', id = self.id, _external = True),
+            'username': self.username,
+            'role': self.role_id
         }
         return json_user
 

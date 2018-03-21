@@ -49,6 +49,7 @@ db.session.commit()
 AttributeError: 'Role' object has no attribute 'translate'
 这里有一个一定要注意的点是，虽然在表中定义的是`role_id`字段，但是这里实际要传入的是`role`！！
 
+admin = User(username='litao', email='litaowork@aliyun.com', password='helloworld', tel='13822136046', role_id=1, address='218', rank=1)
 
 ### 运行项目
 
