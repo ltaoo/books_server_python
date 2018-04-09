@@ -20,17 +20,17 @@ class DevelopmentConfig(Config):
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or \
-        'mysql+pymysql://root:yimi@172.17.0.3:3306/books'
+        'postgresql://0.0.0.0:5432/postgres'
 
 
 class TestingConfig(Config):
     TESTING = True
     SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABASE_URL') or \
-        'mysql+pymysql://root:yimi@172.17.0.3:3306/books'
+        'postgresql://0.0.0.0:5432/postgres'
 
 class ProductionConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-        'mysql+pymysql://root:yimi@172.17.0.3:3306/books'
+        'postgresql://0.0.0.0:5432/postgres'
 
 config = {
     'development': DevelopmentConfig, 'testing': TestingConfig, 'production': ProductionConfig,

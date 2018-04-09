@@ -1,75 +1,35 @@
+> 项目正在重构中...
 
-`books`项目的后端部分，`Python`版，使用`docker`运行`php`容器和`mysql`容器提供接口。
+
+`books`项目的后端部分，`Python`版，使用`docker`运行`python`容器和`postgres`容器提供接口。
 
 ## 使用
 
-首先是构建镜像：
-```bash
-docker build -t bookshop .
-```
-
-运行数据库容器与 php 容器：
-```bash
-./start.sh
-```
-
-开启名为`books`的`php`容器和名为`books_db`的`mysql`容器，再初始化数据表
-```bash
-docker exec -i books_db mysql -uroot -p123 bookshop < setup.sql
-```
-
-## 运行 python 代码
+先构建镜像：
 
 ```bash
-docker run --name ${NAME} -v $PWD:${DIR} -p ${PORT}:80 -it python /bin/bash
+docker-compose build
 ```
 
-上述命令，表示运行一个名字为`${name}`的，将当前目录映射到`${DIR}`文件夹的，端口为`${PORT}`的`python`项目。
+> 可能会出现依赖安装失败，重新运行即可。
+
+可以使用`docker images`查看得到的镜像，名为`booksserver_web`，貌似是「文件夹名」+「服务名」。
+
+该镜像生成后，即可运行容器：
 
 ```bash
-docker run --name books-server -v $PWD:/var/www/books-server -p 8888:80 -it python /bin/bash
+docker-compose up
 ```
 
-运行成功后，进入容器的`/var/www/books-server`文件夹，在里面安装`Flask`。
+等待片刻后，即可查看是否启动镜像：
 
 ```bash
-cd /var/www/books-server
-pip install flask
+docker ps -a
 ```
 
-### 初始化数据
+如果存在名为`booksserver_db_1`和`booksserver_web_1`的两个容器并且两者的状态都为`up`，就表示成功。
 
-```bash
-from index import db, Role, User
-admin_role = Role(name='Admin')
-admin = User(username='ltaoo', email='184009428@qq.com', tel='13822136046', role=admin_role, address='218', rank=1)
-db.session.add_all([admin_role, admin])
-db.session.commit()
-```
-AttributeError: 'Role' object has no attribute 'translate'
-这里有一个一定要注意的点是，虽然在表中定义的是`role_id`字段，但是这里实际要传入的是`role`！！
-
-admin = User(username='litao', email='litaowork@aliyun.com', password='helloworld', tel='13822136046', role_id=1, address='218', rank=1)
-
-### 运行项目
-
-```bash
-python manage.py runserver --host 0.0.0.0
-```
-
-### 依赖管理
-
-生成依赖列表
-
-```bash
-pip freeze >requirements.txt
-```
-
-安装依赖
-
-```bash
-pip install -r requirements.txt
-```
+接下来就可以直接访问`127.0.0.1:8100`了，因为在启动容器时，在容器内执行了命令`python3 manage.py runserver --host 0.0.0.0`，而之所以是`8100`端口，同样可以在`docker-compose.yml`文件中配置。
 
 ## Api
 
