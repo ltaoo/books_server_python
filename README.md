@@ -31,6 +31,26 @@ docker ps -a
 
 接下来就可以直接访问`127.0.0.1:8100`了，因为在启动容器时，在容器内执行了命令`python3 manage.py runserver --host 0.0.0.0`，而之所以是`8100`端口，同样可以在`docker-compose.yml`文件中配置。
 
+## 生成数据库
+
+```bash
+python manage.py db init
+```
+
+将会生成`migrations`文件夹，该文件夹会保存我们用来「迁移」数据库的脚本。
+
+```bash
+python manage.py db migrate
+```
+
+最后再：
+
+```bash
+python manage.py db upgrade
+```
+
+成功在数据库中生成对应的表。
+
 ## Api
 
 ### 用户相关

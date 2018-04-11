@@ -19,18 +19,19 @@ class DevelopmentConfig(Config):
     MAIL_USE_TLS = True
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
+    # 数据库连接
     SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or \
-        'postgresql://0.0.0.0:5432/postgres'
+        'postgresql://postgres@db:5432/postgres'
 
 
 class TestingConfig(Config):
     TESTING = True
     SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABASE_URL') or \
-        'postgresql://0.0.0.0:5432/postgres'
+        'postgresql://db:5432/postgres'
 
 class ProductionConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-        'postgresql://0.0.0.0:5432/postgres'
+        'postgresql://db:5432/postgres'
 
 config = {
     'development': DevelopmentConfig, 'testing': TestingConfig, 'production': ProductionConfig,

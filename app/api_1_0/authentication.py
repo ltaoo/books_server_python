@@ -37,25 +37,20 @@ def before_request():
 # 登录
 @api.route('/login', methods=['POST'])
 def login():
-    # userinfo = request.json
-    # print(userinfo)
-    # user = User.query.filter_by(email=userinfo['email']).first()
-    # # 用户存在，判断密码是否正确
-    # if user is not None and user.verify_password(userinfo['password']):
-    #     print(user)
-    #     return jsonify({
-    #         'c': '0',
-    #         'm': '',
-    #         'd': user.to_json()
-    #     });
-    name = 'ltaoo'
-    return name
-    # return jsonify({
-    #     'c': '-1',
-    #     'm': '用户名或密码错误',
-    #     'd': 'error'
-    # });
-    return jsonify(request.json)
+    userinfo = request.json
+    user = User.query.filter_by(email=userinfo['email']).first()
+    # 用户存在，判断密码是否正确
+    if user is not None and user.verify_password(userinfo['password']):
+        return jsonify({
+            'c': '0',
+            'm': '',
+            'd': user.to_json()
+        })
+    return jsonify({
+        'c': '-1',
+        'm': '用户名或密码错误',
+        'd': 'error'
+    })
 
 # 生成认证令牌
 # @api.route('/tokens/', methods=['POST'])
