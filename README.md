@@ -51,6 +51,24 @@ python manage.py db upgrade
 
 成功在数据库中生成对应的表。
 
+
+## 目前完成的
+
+### 新增用户
+
+`/api/v1.0/users/`
+
+```json
+{
+	"username": "root",
+	"password": "admin123456",
+	"email": "some@qq.com",
+	"tel": "13822137046",
+	"address": "2-9",
+	"rank": 1
+}
+```
+
 ## Api
 
 ### 用户相关

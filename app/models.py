@@ -1,9 +1,18 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
+from .exceptions import ValidationError
+
 from . import login_manager
 
 from . import db
+
+class Permission:
+    FOLLOW = 1
+    COMMENT = 2
+    WRITE = 4
+    MODERATE = 8
+    ADMIN = 16
 
 # 角色
 class Role(db.Model):
@@ -34,7 +43,11 @@ class User(UserMixin, db.Model):
 
     @password.setter
     def password(self, password):
+        print('when set password', password)
         self.password_hash = generate_password_hash(password)
+
+    def __init__(self, **kwargs):
+        super(User, self).__init__(**kwargs)
 
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
@@ -54,12 +67,24 @@ class User(UserMixin, db.Model):
             return None
         return User.query.get(data['id'])
     
+    @staticmethod
+    def from_json(json_user):
+        username = json_user.get('username')
+        password = json_user.get('password')
+        email = json_user.get('email')
+        tel = json_user.get('tel')
+        address = json_user.get('address')
+        rank = json_user.get('rank')
+        if username is None or username == '':
+            raise ValidationError('user does not have a username')
+        if password is None or password == '':
+            raise ValidationError('user does not have a password')
+        return User(username=username, password=password, email=email, tel=tel, address=address, rank=rank)
     # 将用户转换成 JSON
     def to_json(self):
         json_user = {
-            # 'url': url_for('api.get_user', id = self.id, _external = True),
+            'id': self.id,
             'username': self.username,
-            'role': self.role_id
         }
         return json_user
 
