@@ -85,6 +85,10 @@ class User(UserMixin, db.Model):
         json_user = {
             'id': self.id,
             'username': self.username,
+            'email': self.email,
+            'tel': self.tel,
+            'address': self.address,
+            'rank': self.rank,
         }
         return json_user
 

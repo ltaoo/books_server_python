@@ -56,7 +56,7 @@ python manage.py db upgrade
 
 ### 新增用户
 
-`/api/v1.0/users/`
+`POST /api/v1.0/users/`
 
 ```json
 {
@@ -68,6 +68,10 @@ python manage.py db upgrade
 	"rank": 1
 }
 ```
+
+### 获取所有用户
+
+`GET /api/v1.0/users/`
 
 ## Api
 
