@@ -52,7 +52,7 @@ python manage.py db upgrade
 成功在数据库中生成对应的表。
 
 
-## 目前完成的
+## 用户
 
 ### 新增用户
 
@@ -69,9 +69,13 @@ python manage.py db upgrade
 }
 ```
 
+### 更新指定用户
+
 ### 获取所有用户
 
 `GET /api/v1.0/users/`
+
+## 登录
 
 ## Api
 

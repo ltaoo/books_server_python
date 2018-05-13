@@ -50,6 +50,7 @@ class User(UserMixin, db.Model):
         super(User, self).__init__(**kwargs)
 
     def verify_password(self, password):
+        print('password', password)
         return check_password_hash(self.password_hash, password)
     
     # 用户令牌
@@ -110,6 +111,17 @@ class Book(db.Model):
 
     def __repr__(self):
         return '<Book %r>' % self.title
+    def to_json(self):
+        res = {
+            'id': self.id,
+            'title': self.title,
+            'isbn': self.isbn,
+            'price': self.price,
+            'summary': self.summary,
+            'img': self.img,
+            'state': self.state,
+        }
+        return res
 
 # 借阅记录表
 class Record(db.Model):

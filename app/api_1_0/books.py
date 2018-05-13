@@ -5,17 +5,17 @@ from . import api
 from .errors import forbidden
 
 from .. import db
-from ..models import User, Permission
+from ..models import Book, Permission
 
-@api.route('/users/')
-def get_users():
+@api.route('/books/')
+def get_books():
     page = request.args.get('page', 1, type=int)
-    pagination = User.query.paginate(
+    pagination = Book.query.paginate(
         page,
         per_page = current_app.config['FLASKY_POSTS_PER_PAGE'],
         error_out = False
     )
-    users = pagination.items
+    books = pagination.items
     prev = None
     if pagination.has_prev:
         prev = url_for('api.get_users', page = page - 1)
@@ -23,7 +23,7 @@ def get_users():
     if pagination.has_next:
         next = url_for('api.get_users', page = page + 1)
     return jsonify({
-        'users': [user.to_json() for user in users],
+        'books': [book.to_json() for book in books],
         'prev': prev,
         'next': next,
         'count': pagination.total
@@ -36,14 +36,14 @@ def get_users():
 #     return jsonify(post.to_json())
 
 # 新增用户
-@api.route('/users/', methods=['POST'])
-# @permission_required(Permission.WRITE)
-def new_user():
-    print(request.json)
-    user = User.from_json(request.json)
-    db.session.add(user)
-    db.session.commit()
-    return jsonify(user.to_json())
+# @api.route('/users/', methods=['POST'])
+# # @permission_required(Permission.WRITE)
+# def new_post():
+#     print(request.json)
+#     user = User.from_json(request.json)
+#     db.session.add(user)
+#     db.session.commit()
+#     return jsonify(user.to_json())
 
 
 # @api.route('/posts/<int:id>', methods=['PUT'])
