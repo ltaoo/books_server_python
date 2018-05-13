@@ -105,7 +105,7 @@ class Book(db.Model):
     price = db.Column(db.Float)
     summary = db.Column(db.String(120))
     img = db.Column(db.String(120))
-    state = db.Column(db.Integer)
+    state = db.Column(db.Integer, default=0)
 
     records = db.relationship('Record', backref='book')
 
@@ -122,6 +122,18 @@ class Book(db.Model):
             'state': self.state,
         }
         return res
+
+    @staticmethod
+    def from_json(json_user):
+        title = json_user.get('title')
+        isbn = json_user.get('isbn')
+        price = json_user.get('price')
+        summary = json_user.get('summary')
+        img = json_user.get('img')
+        state = json_user.get('state')
+        if title is None or title == '':
+            raise ValidationError('书籍必须有书名')
+        return Book(title=title, isbn=isbn, price=price, summary=summary, img=img, state=state)
 
 # 借阅记录表
 class Record(db.Model):

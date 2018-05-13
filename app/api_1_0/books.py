@@ -36,14 +36,13 @@ def get_books():
 #     return jsonify(post.to_json())
 
 # 新增用户
-# @api.route('/users/', methods=['POST'])
-# # @permission_required(Permission.WRITE)
-# def new_post():
-#     print(request.json)
-#     user = User.from_json(request.json)
-#     db.session.add(user)
-#     db.session.commit()
-#     return jsonify(user.to_json())
+@api.route('/books/', methods=['POST'])
+# @permission_required(Permission.WRITE)
+def new_book():
+    book = Book.from_json(request.json)
+    db.session.add(book)
+    db.session.commit()
+    return jsonify(book.to_json())
 
 
 # @api.route('/posts/<int:id>', methods=['PUT'])
