@@ -10,7 +10,11 @@ from ..models import User, Permission
 @api.route('/users/')
 def get_users():
     page = request.args.get('page', 1, type=int)
-    pagination = User.query.paginate(
+    email = request.args.get('email', type=str)
+    queryRes = User.query
+    if email:
+        queryRes.filter_by(email=email).first()
+    pagination = queryRes.paginate(
         page,
         per_page = current_app.config['FLASKY_POSTS_PER_PAGE'],
         error_out = False
@@ -23,10 +27,31 @@ def get_users():
     if pagination.has_next:
         next = url_for('api.get_users', page = page + 1)
     return jsonify({
-        'users': [user.to_json() for user in users],
-        'prev': prev,
-        'next': next,
-        'count': pagination.total
+        'c': '0',
+        'm': '',
+        'd': {
+            'data': [user.to_json() for user in users],
+            'prev': prev,
+            'next': next,
+            'count': pagination.total
+        }
+    })
+@api.route('/search/user/')
+def search_user():
+    email = request.args.get('email', type=str)
+    user = User.query
+    if email:
+        user = user.filter_by(email=email).first()
+    if user is None:
+        return jsonify({
+            'c': '0',
+            'm': '',
+            'd': None
+        })
+    return jsonify({
+        'c': '0',
+        'm': '',
+        'd': user.to_json()
     })
 
 

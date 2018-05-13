@@ -23,10 +23,14 @@ def get_books():
     if pagination.has_next:
         next = url_for('api.get_users', page = page + 1)
     return jsonify({
-        'books': [book.to_json() for book in books],
+      'c': '0',
+      'm': '',
+      'd': {
+        'data': [book.to_json() for book in books],
         'prev': prev,
         'next': next,
         'count': pagination.total
+      }
     })
 
 
@@ -42,7 +46,11 @@ def new_book():
     book = Book.from_json(request.json)
     db.session.add(book)
     db.session.commit()
-    return jsonify(book.to_json())
+    return jsonify({
+      'c': '0',
+      'm': '',
+      'd': book.to_json(),
+    })
 
 
 # @api.route('/posts/<int:id>', methods=['PUT'])
