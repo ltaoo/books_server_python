@@ -14,16 +14,6 @@ class Permission:
     MODERATE = 8
     ADMIN = 16
 
-# 角色
-class Role(db.Model):
-    __tablename__ = 'roles'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(64), unique=True)
-    users = db.relationship('User', backref='role')
-
-    def __repr__(self):
-        return '<Role %r>' % self.name
-
 # 用户表
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
@@ -34,7 +24,7 @@ class User(UserMixin, db.Model):
     address = db.Column(db.String(120))
     rank = db.Column(db.Integer)
     records = db.relationship('Record', backref='user')
-    role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
+    role = db.Column(db.Integer, default=1)
 
     password_hash = db.Column(db.String(128))
     @property
@@ -76,11 +66,20 @@ class User(UserMixin, db.Model):
         tel = json_user.get('tel')
         address = json_user.get('address')
         rank = json_user.get('rank')
+        role = int(json_user.get('role'))
         if username is None or username == '':
             raise ValidationError('user does not have a username')
         if password is None or password == '':
             raise ValidationError('user does not have a password')
-        return User(username=username, password=password, email=email, tel=tel, address=address, rank=rank)
+        return User(
+            username=username, 
+            password=password, 
+            email=email, 
+            tel=tel, 
+            address=address, 
+            rank=rank,
+            role=role
+        )
     # 将用户转换成 JSON
     def to_json(self):
         json_user = {
@@ -90,6 +89,7 @@ class User(UserMixin, db.Model):
             'tel': self.tel,
             'address': self.address,
             'rank': self.rank,
+            'role': self.role,
         }
         return json_user
 
@@ -145,7 +145,7 @@ class Record(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     book_id = db.Column(db.Integer, db.ForeignKey('books.id'))
-    role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
+    role_id = db.Column(db.Integer)
 
     def __repr__(self):
         return '<Record %r>' % self.id

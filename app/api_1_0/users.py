@@ -68,7 +68,11 @@ def new_user():
     user = User.from_json(request.json)
     db.session.add(user)
     db.session.commit()
-    return jsonify(user.to_json())
+    return jsonify({
+        'c': '0',
+        'm': '',
+        'd': user.to_json()
+    })
 
 
 # @api.route('/posts/<int:id>', methods=['PUT'])

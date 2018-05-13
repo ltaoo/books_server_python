@@ -65,7 +65,8 @@ python manage.py db upgrade
 	"email": "some@qq.com",
 	"tel": "13822137046",
 	"address": "2-9",
-	"rank": 1
+	"rank": 1,
+    "role": 0
 }
 ```
 

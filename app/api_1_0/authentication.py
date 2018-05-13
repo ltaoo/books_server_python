@@ -1,4 +1,5 @@
 from flask import g, jsonify, request
+from flask.ext.login import logout_user, login_required
 # from flask_httpauth import HTTPBasicAuth
 
 from . import api
@@ -50,6 +51,15 @@ def login():
         'c': '-1',
         'm': '用户名或密码错误',
         'd': 'error'
+    })
+
+@api.route('/logout')
+def logout():
+    logout_user()
+    return jsonify({
+        'c': '0',
+        'm': '',
+        'd': ''
     })
 
 # 生成认证令牌
